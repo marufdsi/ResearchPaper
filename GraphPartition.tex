@@ -40,13 +40,23 @@ that can help us in our future research work.
 \subsection{Paper Name: Hypergraph-Partitioning-Based Decomposition for Parallel Sparse-Matrix Vector Multiplication} 
 
 \subsubsection{Overview}
-The paper is all about the decomposition of sparse matrix to reduce the communication requirement for matrix-vector multiplication. 
-
-
-\subsubsection{Strength}
+The paper is all about the decomposition or partitioning of sparse matrix to reduce the communication volume requirement for 
+matrix-vector multiplication. In this paper, they showed two major deficiency of the graph model for decomposing the sparse matrices 
+for parallel SpMxV. The first one is that it only used symmetric matrices and the second one is that it does not reflect the 
+actual communication requirement. They proposed two hyper-graph partitioning models \textit{column-net} and \textit{row-net}, and 
+a multilevel partitioning tool PaToH(\textbf{Pa}rtioning \textbf{To}ols for \textbf{H}ypergraphs) to give a better hypergraph 
+partitioning to reduce the communication during matrix-vector multiplication. In this paper, author first discuss how the decomposition 
+can be helped the SpMV. We can split the paper into multiple key points,
+\begin{itemize}
+\item K-\textit{way} row or column wise hypergraph partitioning for SpMV.
+\item Standard graph partitioning model.
+\item Deficiency of the previous model.
+\item \textit{Column-net} and \textit{row-net} \textit{hypergraph} partitioning model.
+\item \textit{Pa}rtitioning \textit{To}ols for \textit{H}yperhraphs(PaToH)
+\end{itemize}
 
 \subsubsection{Weakness}
-Hyper-graph decomposition run slower than the graph based decomposition. \textit{hMetis} shows worst result in compare to the \textit{pMetis} a 
+Hyper-graph decomposition runs much slower than the graph based decomposition. \textit{hMetis} shows worst result in compare to the \textit{pMetis} a 
 graph based decomposition.
 
 \newpage
