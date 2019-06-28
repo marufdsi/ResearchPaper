@@ -50,11 +50,19 @@ can be helped the SpMV and then showed the deficiency of the existing model. And
 the deficiency. They compare the experimental result of their models with the state-of-art model's experimental results. We can 
 split the paper into multiple key points,
 \begin{itemize}
-\item K-\textit{way} row or column wise hypergraph partitioning for SpMV.
-\item Standard graph partitioning model.
-\item Deficiency of the previous model.
-\item \textit{Column-net} and \textit{row-net} \textit{hypergraph} partitioning model.
-\item \textit{Pa}rtitioning \textit{To}ols for \textit{H}yperhraphs(PaToH)
+\item K-\textit{way} row or column wise hypergraph partitioning for SpMV: If you have K processor in the system then partition the 
+matrix row wise or column wise into balance K portions. So, processor $P_k$ will receive row stripe $A_k^r$ or column stripe $A_k^c$ 
+for the matrix $A$. x and y vectors are also divided as $[x_1,\dots,x_K]^t$ and $[y_1,\dots,y_K]^t$ respectively. In row wise decomposition, 
+processor $P_k$ is handle the computing $y_k\ =\ A_k^rx$ and the linear operations on the $k^{th}$ blocks of the vectors. In column wise decomposition, 
+processor $P_k$ handle the computing $y^k\ =\ A_k^cx_k$(where $y\ =\ \sum_{k=1}^Ky^k$) and the linear operations on the $k^{th}$ block of the vectors. 
+In one-dimensional decomposition, the worst-case communication happened when each submatrix $A_k^r$($A_k^c$) has at least one nonzero 
+in each column(row) in row-wise(column-wise) decomposition and that require K(K-1) message and (K-1)m words. On the other hand 2D checkerboard 
+partitioning the worst-case communication is required 2K($\sqrt{K}$-1) message and 2($\sqrt{K}$-1)m words, and this worst-case occurs during 
+each row and column of each submatrix has at least one nonzero. 
+\item Standard graph partitioning model:
+\item Deficiency of the previous model:
+\item \textit{Column-net} and \textit{row-net} \textit{hypergraph} partitioning model:
+\item \textit{Pa}rtitioning \textit{To}ols for \textit{H}yperhraphs(PaToH):
 \end{itemize}
 
 \subsubsection{Weakness}
