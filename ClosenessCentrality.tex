@@ -1,0 +1,118 @@
+\documentclass[conference, onecolumn]{IEEEtran}
+\IEEEoverridecommandlockouts
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{algorithm,algpseudocode}
+\algrenewcommand\algorithmicindent{0.9em}%
+\usepackage{soul}
+\usepackage{xspace}
+\usepackage{subfigure}
+
+
+\newcommand{\todo}[1]{\color{red}\textbf{\hl{#1}}\color{black}\xspace}
+%\newcommand{\todo}[1]{}
+
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+\begin{document}
+\title{Graph Partitioning Research Review}
+
+
+\author{Md Maruf Hossain}
+%\address{Univerty of North Carolina at Charlotte}
+%\address{University City Blvd, Charlotte}
+%\address{North Carolina, 28223}
+
+\maketitle
+
+\begin{abstract}
+There are lots of graph analysis perform to extract valuable information from the graph data and to handle the large 
+size of graphs, lots of auxiliary utility methods are required. Graph partitioning is a method that can perform 
+independently itself and mining the knowledge from the large graph or it can help a lot of other graph analysis to 
+ensure a faster output or better memory usage. So, in this article, I will review some great works on the graph partitioning 
+that can help us in our future research work.    
+\end{abstract}
+
+\section{SpMV: Shared Memory vs Distributive System}
+First need to find good decomposition model that can partition the matrices into k portions. Find out the off diagonal vertices 
+that incur communication cost during SpMV. Thing we need to explores: 
+\begin{enumerate}
+\item Compare communication cost vs computational cost.
+\item Can we merge multiple partition and get a better result based on the reduce the communication cost.
+\item That can raise communication in compare to the local communication not the global.
+\item Need to explore network benchmark: MVAPICH
+\item Need to explore memory bound SpMV
+\end{enumerate}
+\todo{Need to keep in mind cache size, global vs local communication}
+
+\section{Hyper Graph Partitioning}
+\subsection{Paper Name: Hypergraph-Partitioning-Based Decomposition for Parallel Sparse-Matrix Vector Multiplication} 
+
+\subsubsection{Overview}
+The paper is all about the decomposition or partitioning of sparse matrix to reduce the communication volume requirement for 
+matrix-vector multiplication. In this paper, they showed two major deficiency of the graph model for decomposing the sparse matrices 
+for parallel SpMxV. The first one is that it only used symmetric matrices and the second one is that it does not reflect the 
+actual communication requirement. To mitigate these issues, they proposed two hyper-graph partitioning models \textit{column-net} and \textit{row-net}, 
+and a multilevel partitioning tool PaToH(\textbf{Pa}rtioning \textbf{To}ols for \textbf{H}ypergraphs) to give a better hypergraph 
+partitioning to reduce the communication during matrix-vector multiplication. In this paper, author first discussed how the decomposition 
+can be helped the SpMV and then showed the deficiency of the existing model. And then they mentioned their proposed models and tool to solve 
+the deficiency. They compare the experimental result of their models with the state-of-art model's experimental results. We can 
+split the paper into multiple key points,
+\begin{itemize}
+\item K-\textit{way} row or column wise hypergraph partitioning for SpMV: If you have K processor in the system then partition the 
+matrix row wise or column wise into balance K portions. So, processor $P_k$ will receive row stripe $A_k^r$ or column stripe $A_k^c$ 
+for the matrix $A$. x and y vectors are also divided as $[x_1,\dots,x_K]^t$ and $[y_1,\dots,y_K]^t$ respectively. In row wise decomposition, 
+processor $P_k$ is handle the computing $y_k\ =\ A_k^rx$ and the linear operations on the $k^{th}$ blocks of the vectors. In column wise decomposition, 
+processor $P_k$ handle the computing $y^k\ =\ A_k^cx_k$(where $y\ =\ \sum_{k=1}^Ky^k$) and the linear operations on the $k^{th}$ block of the vectors. 
+In one-dimensional decomposition, the worst-case communication happened when each submatrix $A_k^r$($A_k^c$) has at least one nonzero 
+in each column(row) in row-wise(column-wise) decomposition and that require K(K-1) message and (K-1)m words. On the other hand 2D checkerboard 
+partitioning the worst-case communication is required 2K($\sqrt{K}$-1) message and 2($\sqrt{K}$-1)m words, and this worst-case occurs during 
+each row and column of each submatrix has at least one nonzero. 
+\item Standard graph partitioning model:
+\item Deficiency of the previous model:
+\item \textit{Column-net} and \textit{row-net} \textit{hypergraph} partitioning model:
+\item \textit{Pa}rtitioning \textit{To}ols for \textit{H}yperhraphs(PaToH):
+\end{itemize}
+
+\subsubsection{Weakness}
+Hyper-graph decomposition runs much slower than the graph based decomposition. \textit{hMetis} shows worst result in compare to the \textit{pMetis} a 
+graph based decomposition.
+
+\newpage
+
+\subsection{Paper: Multilevel Hypergraph Partitioning: Applications in VLSI Domain}
+
+\subsubsection{Overview}
+
+\subsubsection{Strength}
+
+\subsubsection{Weakness}
+
+
+\newpage
+
+\subsection{Paper: Fast Recommendation on Bibliographic Networks}
+
+\subsubsection{Overview}
+
+\subsubsection{Strength}
+
+\subsubsection{Weakness}
+
+
+\newpage
+
+\subsection{Paper: Hypergraph Partitioning for Multiple Communication Cost Metrics: Model and Methods}
+
+\subsubsection{Overview}
+
+\subsubsection{Strength}
+
+\subsubsection{Weakness}
+
+
+
+\end{document}
